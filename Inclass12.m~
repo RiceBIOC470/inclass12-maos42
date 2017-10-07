@@ -39,45 +39,19 @@ caxis([0 350]); %not working :/
 cellproperties=regionprops(nimg,'Area','Centroid','Image','PixelIdxList');
 hist([cellproperties.Area]);
 xlabel('Area'); ylabel('Frequency');
-ids=find([cellproperties.Area]>4000); %I need a low number
+ids=find([cellproperties.Area]>4300); %I need a low number
 imshow(cellproperties(ids(1)).Image);
 
 img1cell=false(1024);
 img1cell(cellproperties(ids(1)).PixelIdxList)=true;
-imshow(img1cell); % it is only grabbing the double cells, I don't know why I can't "discriminate"/select all the round cells. 
+imshow(img1cell);
 
 % 3. Use any morphological operations you like to improve this mask (i.e.
 % no holes in nuclei, no tiny fragments etc.)
 
-imshow(nimg, []); %for checking things % there are around 11 cells
-imshow(imdilate(nimg,strel('disk',3))); %can't this be saved? and not into just imshow??
-%this would make my area more defined for a cell. 
+
 
 % 4. Use the mask together with the images to find the mean intensity for
 % each cell nucleus in each of the two channels. Make a plot where each data point 
 % represents one nucleus and these two values are plotted against each other
-
-cellprop2=regionprops(nimg, img1_sm_bgsub, 'MeanIntensity','MaxIntensity','PixelValues','Area','Centroid');
-intensities=[cellprop2.MeanIntensity];
-areas=[cellprop2.Area];
-
-plot(areas, intensities, 'r.', 'MarkerSize',18);
-xlabel('Areas','FontSize',28);
-ylabel('Intensities','FontSize',28);
-
-plane2=reader.getIndex(zplane-1,chan-2,29)+1;
-img2=bfGetPlane(reader,plane2); %esta es la membrana !!!!! 
-imshow(img2,[]) %tiene que haber los corchetes pq si no, daña la img.
-
-
-%this is for graphin the cell nucleus against the cell membrane
-cellprop3=regionprops(img2, img1_sm_bgsub, 'MeanIntensity','MaxIntensity','PixelValues','Area','Centroid');
-intensities3=[cellprop3.MeanIntensity];
-areas3=[cellprop3.Area];
-
-plot(areas, intensities, 'r.', 'MarkerSize',18);
-xlabel('Areas','FontSize',28);
-ylabel('Intensities','FontSize',28);
-
-
 
