@@ -34,13 +34,15 @@ imshow(nimg, []); %for checking things % there are around 11 cells
 img_label=bwlabel(nimg);
 imshow(img_label);
 colormap('jet');
-caxis([0 350]); %not working :/
+caxis([0 149]); %not working :/
+pcolor(img_label); shading flat
+colormap('jet');
 
 cellproperties=regionprops(nimg,'Area','Centroid','Image','PixelIdxList');
 hist([cellproperties.Area]);
 xlabel('Area'); ylabel('Frequency');
-ids=find([cellproperties.Area]>4000); %I need a low number
-imshow(cellproperties(ids(1)).Image);
+ids=find([cellproperties.Area]>2000); %Selects the double-cell
+imshow(cellproperties(ids(2)).Image);
 
 img1cell=false(1024);
 img1cell(cellproperties(ids(1)).PixelIdxList)=true;
@@ -50,7 +52,7 @@ imshow(img1cell); % it is only grabbing the double cells, I don't know why I can
 % no holes in nuclei, no tiny fragments etc.)
 
 imshow(nimg, []); %for checking things % there are around 11 cells
-imshow(imdilate(nimg,strel('disk',3))); %can't this be saved? and not into just imshow??
+dilatedimage=(imdilate(nimg,strel('disk',3))); %can't this be saved? and not into just imshow??
 %this would make my area more defined for a cell. 
 
 % 4. Use the mask together with the images to find the mean intensity for
