@@ -1,4 +1,11 @@
 %Inclass 12. 
+%GB comments
+1) 100
+2) 100
+3) 100 think you could have used bwareaopen to help with removal of small bits. Also starting with a lower threshold and then subsequently eroding the image would have also improved. 
+4) 100
+Overall 100
+
 
 % Continue with the set of images you used for inclass 11, the same time 
 % point (t = 30)
@@ -16,7 +23,7 @@ time=reader.getSizeT;
 
 plane1=reader.getIndex(zplane-1,chan-1,29)+1;
 img1=bfGetPlane(reader,plane1); %esta es la membrana !!!!! 
-imshow(img1,[]) %tiene que haber los corchetes pq si no, daña la img.
+imshow(img1,[]) %tiene que haber los corchetes pq si no, daÃ±a la img.
 
 img1_sm=imfilter(img1,fspecial('gaussian',4,2));
 imshow(img1_sm,[]); %just for checking the smoothing
@@ -69,7 +76,7 @@ ylabel('Intensities','FontSize',28);
 
 plane2=reader.getIndex(zplane-1,chan-2,29)+1;
 img2=bfGetPlane(reader,plane2); %esta es la membrana !!!!! 
-imshow(img2,[]) %tiene que haber los corchetes pq si no, daña la img.
+imshow(img2,[]) %tiene que haber los corchetes pq si no, daÃ±a la img.
 
 
 %this is for graphin the cell nucleus against the cell membrane
